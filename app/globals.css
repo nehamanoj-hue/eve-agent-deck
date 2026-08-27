@@ -109,3 +109,119 @@ html {
 .deck-folder-pop {
   animation: deck-folder-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+
+/* --- Live / looping graphics ------------------------------------------- */
+
+/* A line that draws itself in, then a highlight sweeps along it forever. */
+@keyframes deck-draw {
+  from {
+    stroke-dashoffset: var(--draw-len, 1000);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.deck-draw {
+  stroke-dasharray: var(--draw-len, 1000);
+  animation: deck-draw 0.9s cubic-bezier(0.65, 0, 0.35, 1) 0.3s both;
+}
+
+/* A pulse traveling along a path (used via offset-path). */
+@keyframes deck-travel {
+  from {
+    offset-distance: 0%;
+  }
+  to {
+    offset-distance: 100%;
+  }
+}
+.deck-travel {
+  offset-path: var(--path);
+  animation: deck-travel 2.2s linear infinite;
+}
+
+/* Soft blinking connection dot. */
+@keyframes deck-blink {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.7);
+  }
+}
+.deck-blink {
+  animation: deck-blink 1.8s ease-in-out infinite;
+}
+
+/* Gentle vertical float for stacked layers. */
+@keyframes deck-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+.deck-float {
+  animation: deck-float 4s ease-in-out infinite;
+}
+
+/* A dash flowing along a stroke (data moving through a wire). */
+@keyframes deck-flow {
+  to {
+    stroke-dashoffset: -32;
+  }
+}
+.deck-flow {
+  stroke-dasharray: 4 8;
+  animation: deck-flow 1s linear infinite;
+}
+
+/* A ring that expands and fades (radar ping). */
+@keyframes deck-ping {
+  0% {
+    transform: scale(0.4);
+    opacity: 0.7;
+  }
+  80%,
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+.deck-ping {
+  transform-origin: center;
+  animation: deck-ping 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+/* Token characters scrambling into place (looping). */
+@keyframes deck-scramble {
+  0%,
+  70% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0.4;
+  }
+  80% {
+    opacity: 1;
+  }
+}
+.deck-scramble {
+  animation: deck-scramble 3s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deck-travel,
+  .deck-blink,
+  .deck-float,
+  .deck-flow,
+  .deck-ping,
+  .deck-scramble {
+    animation: none;
+  }
+}

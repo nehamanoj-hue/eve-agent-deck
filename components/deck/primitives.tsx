@@ -568,3 +568,223 @@ export function AgentsTriangle({ className = '' }: { className?: string }) {
     </svg>
   );
 }
+
+/* -------------------------------------------------------------------------- */
+/*  Animated hero graphics for the "then to now" and "agentic infra" slides.  */
+/*  Accent: a single restrained Vercel-blue token used only on live elements. */
+/* -------------------------------------------------------------------------- */
+
+const ACCENT = 'var(--ds-blue-700)';
+
+/**
+ * Animated timeline: a line draws itself in, a lit pulse travels along it
+ * forever, and three era nodes sit on the track (2016 · 2020 · Now).
+ */
+export function VizTimeline() {
+  const eras = [
+    { x: 70, label: '2016', sub: 'Next.js' },
+    { x: 300, label: '2020', sub: 'The platform' },
+    { x: 530, label: 'Now', sub: 'AI + agents', now: true },
+  ];
+  return (
+    <div className="relative w-full">
+      <svg
+        viewBox="0 0 600 120"
+        className="h-auto w-full"
+        fill="none"
+        aria-hidden="true"
+      >
+        {/* base track */}
+        <line x1="70" y1="60" x2="530" y2="60" stroke="var(--ds-gray-400)" strokeWidth="2" />
+        {/* drawn-in progress track */}
+        <line
+          x1="70"
+          y1="60"
+          x2="530"
+          y2="60"
+          stroke={ACCENT}
+          strokeWidth="2"
+          className="deck-draw"
+          style={{ ['--draw-len' as string]: '460' }}
+        />
+        {/* traveling pulse */}
+        <circle
+          r="4"
+          fill={ACCENT}
+          className="deck-travel"
+          style={{ ['--path' as string]: 'path("M70 60 L530 60")' }}
+        />
+
+        {eras.map((e) => (
+          <g key={e.label}>
+            {e.now ? (
+              <circle cx={e.x} cy="60" r="14" fill="none" stroke={ACCENT} strokeWidth="1.5" className="deck-ping" />
+            ) : null}
+            <circle
+              cx={e.x}
+              cy="60"
+              r="9"
+              fill={e.now ? ACCENT : 'var(--ds-background-100)'}
+              stroke={e.now ? ACCENT : 'var(--ds-gray-700)'}
+              strokeWidth="2"
+            />
+            <text
+              x={e.x}
+              y="30"
+              textAnchor="middle"
+              className="font-mono"
+              fontSize="15"
+              fill="var(--ds-gray-1000)"
+            >
+              {e.label}
+            </text>
+            <text
+              x={e.x}
+              y="96"
+              textAnchor="middle"
+              className="font-mono"
+              fontSize="12"
+              letterSpacing="1"
+              fill="var(--ds-gray-600)"
+            >
+              {e.sub}
+            </text>
+          </g>
+        ))}
+      </svg>
+    </div>
+  );
+}
+
+/**
+ * Animated agent loop: Perceive -> Reason -> Act arranged in a ring with a
+ * continuously flowing connector and a pulse that orbits the loop.
+ */
+export function VizAgentLoop() {
+  // triangle-ish ring positions inside a 320x260 box
+  const nodes = [
+    { x: 160, y: 44, k: 'Perceive', d: 'read context' },
+    { x: 268, y: 200, k: 'Reason', d: 'decide step' },
+    { x: 52, y: 200, k: 'Act', d: 'call a tool' },
+  ];
+  const ringPath =
+    'M160 60 C 240 80, 268 140, 258 190 C 210 210, 110 210, 62 190 C 52 140, 80 80, 160 60 Z';
+  return (
+    <div className="relative mx-auto w-full max-w-[420px]">
+      <svg viewBox="0 0 320 260" className="h-auto w-full" fill="none" aria-hidden="true">
+        {/* the loop wire */}
+        <path d={ringPath} stroke="var(--ds-gray-400)" strokeWidth="1.5" />
+        {/* flowing dashes over the wire */}
+        <path d={ringPath} stroke={ACCENT} strokeWidth="1.5" className="deck-flow" />
+        {/* orbiting pulse */}
+        <circle
+          r="4.5"
+          fill={ACCENT}
+          className="deck-travel"
+          style={{ ['--path' as string]: `path("${ringPath}")` }}
+        />
+        {/* center label */}
+        <text
+          x="160"
+          y="130"
+          textAnchor="middle"
+          className="font-mono"
+          fontSize="11"
+          letterSpacing="2"
+          fill="var(--ds-gray-600)"
+        >
+          LOOP
+        </text>
+        <text
+          x="160"
+          y="146"
+          textAnchor="middle"
+          className="font-mono"
+          fontSize="11"
+          letterSpacing="2"
+          fill="var(--ds-gray-600)"
+        >
+          UNTIL DONE
+        </text>
+      </svg>
+
+      {/* nodes as HTML chips for crisp text */}
+      {nodes.map((n, i) => (
+        <div
+          key={n.k}
+          className="absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-0.5 rounded-lg border border-[var(--ds-gray-500)] bg-[var(--ds-background-100)] px-4 py-2.5"
+          style={{ left: `${(n.x / 320) * 100}%`, top: `${(n.y / 260) * 100}%` }}
+        >
+          <span className="flex items-center gap-1.5 text-copy-16 text-[var(--ds-gray-1000)]">
+            <span
+              className="deck-blink h-1.5 w-1.5 rounded-full"
+              style={{ background: ACCENT, animationDelay: `${i * 0.6}s` }}
+            />
+            {n.k}
+          </span>
+          <span className="font-mono text-[11px] text-[var(--ds-gray-600)]">{n.d}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/**
+ * Animated connections graphic: the agent core in the center, short-lived
+ * tokens flowing out along wires to external services. Used on the new
+ * connections/ slide.
+ */
+export function VizConnections() {
+  const services = [
+    { y: 30, g: <GlyphGitHub className="h-4 w-4" />, k: 'GitHub' },
+    { y: 90, g: <GlyphStripe className="h-4 w-4" />, k: 'Stripe' },
+    { y: 150, g: <GlyphLinear className="h-4 w-4" />, k: 'Linear' },
+    { y: 210, g: <GlyphSlack className="h-4 w-4" />, k: 'Slack' },
+  ];
+  const hubX = 60;
+  const svcX = 300;
+  return (
+    <div className="relative w-full">
+      <svg viewBox="0 0 360 240" className="h-auto w-full" fill="none" aria-hidden="true">
+        {services.map((s, i) => {
+          const d = `M${hubX} 120 C 170 120, 190 ${s.y}, ${svcX} ${s.y}`;
+          return (
+            <g key={s.k}>
+              <path d={d} stroke="var(--ds-gray-400)" strokeWidth="1.5" />
+              <path d={d} stroke={ACCENT} strokeWidth="1.5" className="deck-flow" style={{ animationDelay: `${i * 0.25}s` }} />
+              <circle
+                r="3.5"
+                fill={ACCENT}
+                className="deck-travel"
+                style={{ ['--path' as string]: `path("${d}")`, animationDelay: `${i * 0.4}s` }}
+              />
+            </g>
+          );
+        })}
+        {/* hub */}
+        <circle cx={hubX} cy="120" r="26" fill="none" stroke={ACCENT} strokeWidth="1.5" className="deck-ping" />
+        <circle cx={hubX} cy="120" r="20" fill="var(--ds-gray-1000)" />
+        <path d={`M${hubX} 109 L${hubX + 11} 130 H${hubX - 11} Z`} fill="var(--ds-background-100)" />
+      </svg>
+
+      {/* service chips */}
+      {services.map((s) => (
+        <div
+          key={s.k}
+          className="absolute flex -translate-y-1/2 items-center gap-2 rounded-md border border-[var(--ds-gray-500)] bg-[var(--ds-background-100)] px-3 py-1.5"
+          style={{ left: `${(svcX / 360) * 100}%`, top: `${(s.y / 240) * 100}%`, transform: 'translate(-14%, -50%)' }}
+        >
+          <span className="text-[var(--ds-gray-1000)]">{s.g}</span>
+          <span className="font-mono text-[12px] text-[var(--ds-gray-1000)]">{s.k}</span>
+        </div>
+      ))}
+      {/* hub label */}
+      <span
+        className="absolute -translate-x-1/2 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--ds-gray-600)]"
+        style={{ left: `${(hubX / 360) * 100}%`, top: '68%' }}
+      >
+        agent
+      </span>
+    </div>
+  );
+}

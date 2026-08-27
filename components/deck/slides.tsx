@@ -15,11 +15,14 @@ import {
   OpeningFolder,
   Tag,
   Triangle,
+  VizAgentLoop,
   VizAiSdk,
   VizChat,
+  VizConnections,
   VizFluid,
   VizGateway,
   VizSandbox,
+  VizTimeline,
   VizWorkflow,
 } from './primitives';
 
@@ -129,7 +132,7 @@ export const slides: SlideDef[] = [
     id: 'vercel',
     nav: 'Vercel',
     render: () => (
-      <Slide className="gap-12">
+      <Slide className="gap-10">
         <div className="flex flex-col gap-6">
           <Kicker index="01" label="Vercel: then to now" />
           <h2 className="flex flex-wrap items-center gap-4 text-heading-56 leading-[1.05] text-[var(--ds-gray-1000)]">
@@ -140,6 +143,11 @@ export const slides: SlideDef[] = [
             We made building for the web easy, fast, and reliable. Now we&apos;re doing
             the same thing for AI.
           </p>
+        </div>
+
+        {/* Animated era timeline */}
+        <div className="rounded-xl border border-[var(--ds-gray-400)] bg-[var(--ds-background-100)] px-8 pb-6 pt-8">
+          <VizTimeline />
         </div>
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
@@ -154,7 +162,7 @@ export const slides: SlideDef[] = [
               n: '2020',
               k: 'Then we built the platform',
               d: 'Push your code and Vercel handles the rest: hosting, scaling, storage, security, and speed.',
-              tags: ['Global network', 'Zero servers to manage'],
+              tags: ['Global network', 'Zero servers'],
             },
             {
               n: 'Now',
@@ -166,22 +174,32 @@ export const slides: SlideDef[] = [
           ].map((c) => (
             <div
               key={c.k}
-              className={`flex flex-col gap-4 rounded-lg border p-7 ${
+              className={`flex flex-col gap-3 rounded-lg border p-6 ${
                 c.highlight
-                  ? 'border-[var(--ds-gray-1000)] bg-[var(--ds-gray-100)]'
+                  ? 'border-[var(--ds-blue-700)] bg-[var(--ds-blue-100)]'
                   : 'border-[var(--ds-gray-500)] bg-[var(--ds-background-100)]'
               }`}
             >
-              <span className="font-mono text-label-13 text-[var(--ds-gray-600)]">{c.n}</span>
+              <span
+                className={`font-mono text-label-13 ${
+                  c.highlight ? 'text-[var(--ds-blue-700)]' : 'text-[var(--ds-gray-600)]'
+                }`}
+              >
+                {c.n}
+              </span>
               <span className="text-balance text-heading-24 leading-tight text-[var(--ds-gray-1000)]">
                 {c.k}
               </span>
-              <span className="text-copy-18 leading-snug text-[var(--ds-gray-700)]">{c.d}</span>
+              <span className="text-copy-16 leading-snug text-[var(--ds-gray-700)]">{c.d}</span>
               <div className="mt-auto flex flex-wrap gap-2 pt-2">
                 {c.tags.map((t) => (
                   <span
                     key={t}
-                    className="rounded-full border border-[var(--ds-gray-500)] px-3 py-1 text-copy-14 text-[var(--ds-gray-700)]"
+                    className={`rounded-full border px-3 py-1 text-copy-14 ${
+                      c.highlight
+                        ? 'border-[var(--ds-blue-400)] text-[var(--ds-blue-700)]'
+                        : 'border-[var(--ds-gray-500)] text-[var(--ds-gray-700)]'
+                    }`}
                   >
                     {t}
                   </span>
@@ -199,45 +217,60 @@ export const slides: SlideDef[] = [
     id: 'agentic-infra',
     nav: 'Agentic infra',
     render: () => (
-      <Slide className="gap-14">
-        <div className="flex flex-col gap-6">
+      <Slide className="gap-10">
+        <div className="flex flex-col gap-5">
           <Kicker index="02" label="The shift" />
-          <h2 className="max-w-5xl text-balance text-heading-64 leading-[1.02] text-[var(--ds-gray-1000)]">
+          <h2 className="max-w-5xl text-balance text-heading-56 leading-[1.02] text-[var(--ds-gray-1000)]">
             Now we build agentic infrastructure.
           </h2>
-          <p className="max-w-4xl text-pretty text-heading-32 font-normal leading-snug text-[var(--ds-gray-800)]">
+          <p className="max-w-4xl text-pretty text-heading-28 font-normal leading-snug text-[var(--ds-gray-800)]">
             Agents need more than a model call. They need compute, durability, memory,
             and a way to reach the outside world &mdash; running reliably in production.
           </p>
         </div>
 
-        <div className="flex flex-col items-stretch gap-4 lg:flex-row lg:items-center">
-          {[
-            { k: 'Web apps', d: 'Framework, hosting, scaling, storage.', now: false },
-            { k: 'AI apps', d: 'Model access, streaming, edge speed.', now: false },
-            { k: 'Agents', d: 'Durable runtime, sandboxes, channels, connections.', now: true },
-          ].map((c, i, arr) => (
-            <div key={c.k} className="flex flex-1 items-center gap-4">
-              <div
-                className={`flex flex-1 flex-col gap-3 rounded-lg border p-7 ${
-                  c.now
-                    ? 'border-[var(--ds-gray-1000)] bg-[var(--ds-gray-100)]'
-                    : 'border-[var(--ds-gray-500)] bg-[var(--ds-background-100)]'
-                }`}
-              >
-                <span className="flex items-center gap-2 text-heading-24 text-[var(--ds-gray-1000)]">
-                  {c.now ? <Triangle className="h-5 w-5" /> : null}
-                  {c.k}
+        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+          {/* Progression ladder */}
+          <div className="flex flex-col gap-3">
+            {[
+              { k: 'Web apps', d: 'Framework, hosting, scaling, storage.', now: false },
+              { k: 'AI apps', d: 'Model access, streaming, edge speed.', now: false },
+              {
+                k: 'Agents',
+                d: 'Durable runtime, sandboxes, channels, connections.',
+                now: true,
+              },
+            ].map((c, i) => (
+              <div key={c.k} className="flex items-center gap-4">
+                <span className="w-6 shrink-0 text-center font-mono text-label-14 text-[var(--ds-gray-500)]">
+                  {i < 2 ? '\u2193' : ''}
                 </span>
-                <span className="text-copy-18 leading-snug text-[var(--ds-gray-700)]">{c.d}</span>
+                <div
+                  className={`deck-float flex flex-1 items-center gap-4 rounded-lg border p-5 ${
+                    c.now
+                      ? 'border-[var(--ds-blue-700)] bg-[var(--ds-blue-100)]'
+                      : 'border-[var(--ds-gray-500)] bg-[var(--ds-background-100)]'
+                  }`}
+                  style={c.now ? undefined : { animation: 'none' }}
+                >
+                  {c.now ? (
+                    <Triangle className="h-5 w-5 shrink-0 text-[var(--ds-blue-700)]" />
+                  ) : null}
+                  <div className="flex flex-col gap-1">
+                    <span className="text-heading-24 text-[var(--ds-gray-1000)]">{c.k}</span>
+                    <span className="text-copy-16 leading-snug text-[var(--ds-gray-700)]">
+                      {c.d}
+                    </span>
+                  </div>
+                </div>
               </div>
-              {i < arr.length - 1 ? (
-                <span className="hidden text-heading-32 text-[var(--ds-gray-600)] lg:inline">
-                  &rarr;
-                </span>
-              ) : null}
-            </div>
-          ))}
+            ))}
+          </div>
+
+          {/* Animated agent loop */}
+          <div className="flex items-center justify-center rounded-xl border border-[var(--ds-gray-400)] bg-[var(--ds-background-100)] p-8">
+            <VizAgentLoop />
+          </div>
         </div>
       </Slide>
     ),
@@ -525,7 +558,61 @@ export default slackChannel({
     ),
   },
 
-  // 9 - init command
+  // 9 - connections/ folder (reach any API)
+  {
+    id: 'connections',
+    nav: 'Connections',
+    render: () => (
+      <Slide className="gap-8">
+        <div className="flex flex-col gap-3">
+          <Kicker index="08" label="connections/" />
+          <h2 className="text-balance text-heading-48 leading-tight text-[var(--ds-gray-1000)]">
+            Reach any API, no keys in your code.
+          </h2>
+          <p className="max-w-4xl text-pretty text-heading-28 font-normal leading-snug text-[var(--ds-gray-800)]">
+            Drop a file into <span className="font-mono">connections/</span> and tools call
+            out to GitHub, Stripe, Linear, and Slack &mdash; authenticated with short-lived
+            tokens that Vercel Connect mints on every request.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 items-center gap-6 lg:grid-cols-[0.85fr_1.15fr]">
+          {/* left: folder + code */}
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-2 font-mono text-label-14 text-[var(--ds-gray-700)]">
+              <IconFolder className="h-4 w-4 text-[var(--ds-gray-1000)]" /> connections/
+            </div>
+            <div className="w-full overflow-hidden rounded-lg border border-[var(--ds-gray-400)] bg-black">
+              <div className="flex items-center gap-2 border-b border-[var(--ds-gray-400)] px-3 py-2">
+                <span className="rounded-[3px] bg-[var(--ds-gray-300)] px-1 font-mono text-[10px] font-medium text-black">
+                  TS
+                </span>
+                <span className="font-mono text-[11px] text-[var(--ds-gray-600)]">
+                  connections/github.ts
+                </span>
+              </div>
+              <pre className="whitespace-pre px-4 py-4 font-mono text-[12px] leading-[1.8] text-[var(--ds-gray-800)]">
+                {`import { connection } from "eve/connections";
+
+export default connection({
+  provider: "github",
+  // Connect issues a fresh, short-lived
+  // token per request. No secrets stored.
+});`}
+              </pre>
+            </div>
+          </div>
+
+          {/* right: animated token flow */}
+          <div className="flex items-center justify-center rounded-xl border border-[var(--ds-gray-400)] bg-[var(--ds-background-100)] p-6">
+            <VizConnections />
+          </div>
+        </div>
+      </Slide>
+    ),
+  },
+
+  // 10 - init command
   {
     id: 'init',
     nav: 'Init',
@@ -561,7 +648,7 @@ export default slackChannel({
     render: () => (
       <Slide className="gap-10">
         <div className="flex flex-col gap-3">
-          <Kicker index="08" label="Vercel Connect" />
+          <Kicker index="09" label="Vercel Connect" />
           <h2 className="text-balance text-heading-48 leading-tight text-[var(--ds-gray-1000)]">
             No API keys to manage.
           </h2>
@@ -613,7 +700,7 @@ export default slackChannel({
     render: () => (
       <Slide className="gap-10">
         <div className="flex flex-col gap-3">
-          <Kicker index="09" label="Out of the box" />
+          <Kicker index="10" label="Out of the box" />
           <h2 className="text-balance text-heading-48 leading-tight text-[var(--ds-gray-1000)]">
             Built for production, from the start.
           </h2>
