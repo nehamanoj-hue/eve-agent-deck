@@ -440,6 +440,31 @@ export const slides: SlideDef[] = [
             and eve compiles the directory into a durable, production agent.
           </p>
         </div>
+
+        <div className="flex flex-col gap-5 rounded-lg border border-[var(--ds-blue-400)] bg-[var(--ds-blue-100)] p-8">
+          <p className="text-heading-24 font-semibold text-[var(--ds-gray-1000)]">
+            eve is <span className="text-[var(--ds-blue-700)]">production by default</span>.
+          </p>
+          <ul className="grid grid-cols-1 gap-x-10 gap-y-3 sm:grid-cols-2">
+            {[
+              'Durable execution',
+              'Sandboxed compute',
+              'Human approvals',
+              'Built-in evals',
+            ].map((item) => (
+              <li
+                key={item}
+                className="flex items-center gap-3 text-copy-18 text-[var(--ds-gray-900)]"
+              >
+                <Triangle className="h-3.5 w-3.5 shrink-0 text-[var(--ds-blue-700)]" />
+                {item}
+              </li>
+            ))}
+          </ul>
+          <p className="text-copy-18 text-[var(--ds-gray-800)]">
+            Not add-ons you bolt on later &mdash; in the box from the first command.
+          </p>
+        </div>
       </Slide>
     ),
   },
