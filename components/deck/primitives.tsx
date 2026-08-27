@@ -394,6 +394,114 @@ export function HArrow({ label, className = '' }: { label?: string; className?: 
   );
 }
 
+/* -------------------------------------------------------------------------- */
+/*  Scaffolding: an opening folder + file-tree glyphs.                        */
+/* -------------------------------------------------------------------------- */
+
+/** A small file glyph. */
+export function IconFile({ className = '' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" className={className}>
+      <path
+        d="M4 1.5h5L13 5.5V14.5H4z"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinejoin="round"
+      />
+      <path d="M9 1.5V5.5H13" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+/** A small folder glyph. */
+export function IconFolder({ className = '' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" className={className}>
+      <path
+        d="M1.5 4V13a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H7.5L6 3.2A1 1 0 0 0 5.2 3H2.5a1 1 0 0 0-1 1Z"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+/** A key glyph for the Vercel Connect slide. */
+export function IconKey({ className = '' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" className={className}>
+      <circle cx="5" cy="6" r="3.2" stroke="currentColor" strokeWidth="1.2" />
+      <path
+        d="M7.3 8.3 13 14M11 12l1.4-1.4M12.4 13.4 14 11.8"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+/** The animated opening-folder graphic used on the scaffolding slide. */
+export function OpeningFolder({ className = '' }: { className?: string }) {
+  return (
+    <div
+      className={`relative ${className}`}
+      style={{ perspective: '600px' }}
+      aria-hidden="true"
+    >
+      {/* folder back */}
+      <div className="relative h-[120px] w-[168px]">
+        <div className="absolute inset-0 rounded-md rounded-tl-none border border-[var(--ds-gray-600)] bg-[var(--ds-gray-200)]" />
+        {/* tab */}
+        <div className="absolute -top-[10px] left-0 h-[14px] w-[64px] rounded-t-md border border-b-0 border-[var(--ds-gray-600)] bg-[var(--ds-gray-200)]" />
+        {/* opening front flap */}
+        <div
+          className="deck-folder-lid absolute bottom-0 left-0 right-0 h-[86px] rounded-b-md border border-[var(--ds-gray-500)] bg-[var(--ds-gray-100)]"
+          style={{ transformStyle: 'preserve-3d' }}
+        />
+        {/* eve triangle inside */}
+        <Triangle className="absolute left-1/2 top-[30px] h-6 w-6 -translate-x-1/2 text-[var(--ds-gray-700)]" />
+      </div>
+    </div>
+  );
+}
+
+/* -- service glyphs for the Vercel Connect slide (monochrome) -------------- */
+
+export function GlyphGitHub({ className = '' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.2.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z" />
+    </svg>
+  );
+}
+
+export function GlyphSlack({ className = '' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M5.04 15.16a2.02 2.02 0 1 1-2.02-2.02h2.02v2.02Zm1.01 0a2.02 2.02 0 0 1 4.04 0v5.05a2.02 2.02 0 0 1-4.04 0v-5.05ZM8.07 5.04A2.02 2.02 0 1 1 10.09 3v2.02H8.07Zm0 1.01a2.02 2.02 0 0 1 0 4.04H3.02a2.02 2.02 0 0 1 0-4.04h5.05ZM18.96 8.07a2.02 2.02 0 1 1 2.02 2.02h-2.02V8.07Zm-1.01 0a2.02 2.02 0 0 1-4.04 0V3.02a2.02 2.02 0 0 1 4.04 0v5.05ZM15.93 18.96a2.02 2.02 0 1 1-2.02 2.02v-2.02h2.02Zm0-1.01a2.02 2.02 0 0 1 0-4.04h5.05a2.02 2.02 0 0 1 0 4.04h-5.05Z" />
+    </svg>
+  );
+}
+
+export function GlyphStripe({ className = '' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M11.4 9.6c0-.72.6-1 1.56-1 1.38 0 3.12.42 4.5 1.16V5.7A12 12 0 0 0 12.96 5C9.6 5 7.36 6.76 7.36 9.7c0 4.6 6.32 3.86 6.32 5.84 0 .85-.74 1.12-1.76 1.12-1.5 0-3.42-.62-4.94-1.45v4.13c1.68.72 3.38 1.03 4.94 1.03 3.44 0 5.8-1.7 5.8-4.68 0-4.96-6.36-4.08-6.36-5.96Z" />
+    </svg>
+  );
+}
+
+export function GlyphLinear({ className = '' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M2.05 13.3a10 10 0 0 0 8.65 8.65L2.05 13.3ZM2 11.02 12.98 22a10.05 10.05 0 0 0 3.02-.7L2.7 8a10.05 10.05 0 0 0-.7 3.02ZM3.6 6.06 17.94 20.4a10.06 10.06 0 0 0 2.06-1.53L5.13 4A10.06 10.06 0 0 0 3.6 6.06ZM6.46 2.94 21.06 17.54A10 10 0 0 0 6.46 2.94Z" />
+    </svg>
+  );
+}
+
 /** The dotted "agents" triangle from the reference title slide, recreated as an SVG. */
 export function AgentsTriangle({ className = '' }: { className?: string }) {
   const top = { x: 300, y: 40 };

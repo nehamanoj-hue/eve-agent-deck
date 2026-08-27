@@ -35,3 +35,77 @@ html {
 .deck-slide-enter {
   animation: deck-slide-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+
+/* Staggered reveal for lists / file trees. */
+@keyframes deck-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.deck-stagger > * {
+  animation: deck-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.deck-stagger > *:nth-child(1) {
+  animation-delay: 0.34s;
+}
+.deck-stagger > *:nth-child(2) {
+  animation-delay: 0.42s;
+}
+.deck-stagger > *:nth-child(3) {
+  animation-delay: 0.5s;
+}
+.deck-stagger > *:nth-child(4) {
+  animation-delay: 0.58s;
+}
+.deck-stagger > *:nth-child(5) {
+  animation-delay: 0.66s;
+}
+.deck-stagger > *:nth-child(6) {
+  animation-delay: 0.74s;
+}
+.deck-stagger > *:nth-child(7) {
+  animation-delay: 0.82s;
+}
+.deck-stagger > *:nth-child(8) {
+  animation-delay: 0.9s;
+}
+.deck-stagger > *:nth-child(9) {
+  animation-delay: 0.98s;
+}
+.deck-stagger > *:nth-child(10) {
+  animation-delay: 1.06s;
+}
+
+/* Folder lid opening for the scaffolding slide. */
+@keyframes deck-folder-lid {
+  from {
+    transform: rotateX(0deg);
+  }
+  to {
+    transform: rotateX(-42deg);
+  }
+}
+.deck-folder-lid {
+  transform-origin: bottom center;
+  animation: deck-folder-lid 0.7s cubic-bezier(0.34, 1.4, 0.5, 1) 0.12s both;
+}
+
+@keyframes deck-folder-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.deck-folder-pop {
+  animation: deck-folder-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
