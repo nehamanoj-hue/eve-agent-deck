@@ -316,6 +316,18 @@ export const slides: SlideDef[] = [
         <p className="font-mono text-label-14 uppercase tracking-[0.18em] text-[var(--ds-gray-600)]">
           Loop until done
         </p>
+
+        <div className="flex flex-col gap-3 rounded-xl border border-[var(--ds-blue-700)] bg-[var(--ds-blue-100)] p-7">
+          <span className="font-mono text-label-13 uppercase tracking-[0.18em] text-[var(--ds-blue-700)]">
+            The way we think about it
+          </span>
+          <p className="text-balance text-heading-32 font-normal leading-snug text-[var(--ds-gray-1000)]">
+            eve is to <span className="font-semibold text-[var(--ds-blue-700)]">agents</span>{' '}
+            what <span className="font-semibold">Next.js</span> is to{' '}
+            <span className="font-semibold">web apps</span> &mdash; the framework that
+            turns a prototype into production.
+          </p>
+        </div>
       </Slide>
     ),
   },
