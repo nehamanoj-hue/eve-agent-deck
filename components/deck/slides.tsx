@@ -528,74 +528,7 @@ export const slides: SlideDef[] = [
     },
   },
 
-  // 8 - channels/ folder
-  {
-    id: 'channels',
-    nav: 'Channels',
-    render: () => (
-      <Slide className="gap-10">
-        <div className="flex flex-col gap-3">
-          <Kicker index="07" label="channels/" />
-          <h2 className="text-balance text-heading-48 leading-tight text-[var(--ds-gray-1000)]">
-            One agent codebase, every channel.
-          </h2>
-          <p className="max-w-4xl text-pretty text-heading-32 font-normal leading-snug text-[var(--ds-gray-800)]">
-            Drop a file into <span className="font-mono">channels/</span> and the same
-            agent shows up wherever your users are.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          {/* Folder listing */}
-          <div className="flex flex-col gap-3">
-            <div className="flex items-center gap-2 font-mono text-label-14 text-[var(--ds-gray-700)]">
-              <IconFolder className="h-4 w-4 text-[var(--ds-gray-1000)]" /> channels/
-            </div>
-            <div className="deck-stagger flex flex-col gap-2.5">
-              {[
-                { f: 'slack.ts', g: <GlyphSlack className="h-4 w-4" /> },
-                { f: 'discord.ts', g: <span className="font-mono text-[11px]">D</span> },
-                { f: 'teams.ts', g: <span className="font-mono text-[11px]">T</span> },
-                { f: 'web.ts', g: <span className="font-mono text-[11px]">W</span> },
-              ].map((c) => (
-                <div
-                  key={c.f}
-                  className="flex items-center gap-3 rounded-md border border-[var(--ds-gray-500)] bg-[var(--ds-background-100)] px-4 py-3"
-                >
-                  <span className="flex h-6 w-6 items-center justify-center rounded-[5px] border border-[var(--ds-gray-500)] text-[var(--ds-gray-1000)]">
-                    {c.g}
-                  </span>
-                  <span className="font-mono text-copy-16 text-[var(--ds-gray-1000)]">{c.f}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Code snippet */}
-          <div className="w-full self-start overflow-hidden rounded-lg border border-[var(--ds-gray-400)] bg-black">
-            <div className="flex items-center gap-2 border-b border-[var(--ds-gray-400)] px-3 py-2">
-              <span className="rounded-[3px] bg-[var(--ds-gray-300)] px-1 font-mono text-[10px] font-medium text-black">
-                TS
-              </span>
-              <span className="font-mono text-[11px] text-[var(--ds-gray-600)]">
-                channels/slack.ts
-              </span>
-            </div>
-            <pre className="whitespace-pre px-4 py-4 font-mono text-[12px] leading-[1.8] text-[var(--ds-gray-800)]">
-              {`import { connectSlackCredentials } from "@vercel/connect/eve";
-import { slackChannel } from "eve/channels/slack";
-
-export default slackChannel({
-  credentials: connectSlackCredentials("slack/my-agent"),
-});`}
-            </pre>
-          </div>
-        </div>
-      </Slide>
-    ),
-  },
-
-  // 9 - connections/ folder (reach any API)
+  // 8 - connections/ folder (reach any API)
   {
     id: 'connections',
     nav: 'Connections',
