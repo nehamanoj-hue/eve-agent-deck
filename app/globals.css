@@ -1,0 +1,37 @@
+@import '@vercel/geistcn/tailwind.css';
+@import '@vercel/geistcn/styles.css';
+
+/* Tailwind v4 ignores node_modules during automatic content detection, so we
+   explicitly register the design-system package as a source. This ensures the
+   utility classes used inside @vercel/geistcn's components are generated. */
+@source "../node_modules/@vercel/geistcn";
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+body,
+html {
+  background: var(--ds-background-200);
+}
+
+@keyframes deck-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.deck-slide-enter {
+  animation: deck-slide-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
