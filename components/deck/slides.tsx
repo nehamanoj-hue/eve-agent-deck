@@ -49,52 +49,85 @@ export type SlideDef = {
   render: () => ReactNode;
 };
 
-const LINKEDIN_URL = 'https://www.linkedin.com/in/neha-manoj/';
-const EMAIL = 'Neha.manoj@vercel.com';
+type Speaker = {
+  name: string;
+  role: string;
+  email: string;
+  photo: string;
+  linkedin: string;
+};
+
+const SPEAKERS: Speaker[] = [
+  {
+    name: 'Neha Manoj',
+    role: 'Solutions Architect',
+    email: 'Neha.manoj@vercel.com',
+    photo: '/neha-manoj.png',
+    linkedin: 'https://www.linkedin.com/in/neha-manoj/',
+  },
+  {
+    name: 'William Armstrong',
+    role: 'Solutions Architect',
+    email: 'william.armstrong@vercel.com',
+    photo: '/william-armstrong.png',
+    linkedin: 'https://www.linkedin.com/in/william-armstrong8/',
+  },
+];
 
 /** Reusable presenter identity block used on the opening and closing slides. */
 function PresenterCard({ lead }: { lead: ReactNode }) {
   return (
-    <div className="flex flex-col items-start justify-between gap-16 lg:flex-row lg:items-center">
+    <div className="flex flex-col items-start justify-between gap-12 lg:flex-row lg:items-center">
       {/* Left: statement + identity */}
       <div className="flex flex-col gap-8">
         <LogoVercel height={30} aria-label="Vercel" className="text-[var(--ds-gray-1000)]" />
         {lead}
-        <div className="flex items-center gap-4">
-          <img
-            src="/neha-manoj.png"
-            alt="Neha Manoj"
-            className="h-16 w-16 rounded-full object-cover grayscale"
-          />
-          <div className="flex flex-col">
-            <p className="text-copy-24 text-[var(--ds-gray-1000)]">
-              Neha Manoj{' '}
-              <span className="text-[var(--ds-gray-600)]">· Solutions Architect</span>
-            </p>
-            <a
-              href={`mailto:${EMAIL}`}
-              className="font-mono text-label-14 text-[var(--ds-gray-600)]"
-            >
-              {EMAIL}
-            </a>
-          </div>
+        <div className="flex flex-col gap-4">
+          {SPEAKERS.map((s) => (
+            <div key={s.name} className="flex items-center gap-4">
+              <img
+                src={s.photo || '/placeholder.svg'}
+                alt={s.name}
+                className="h-14 w-14 rounded-full object-cover grayscale"
+              />
+              <div className="flex flex-col">
+                <p className="text-copy-24 text-[var(--ds-gray-1000)]">
+                  {s.name}{' '}
+                  <span className="text-[var(--ds-gray-600)]">· {s.role}</span>
+                </p>
+                <a
+                  href={`mailto:${s.email}`}
+                  className="font-mono text-label-14 text-[var(--ds-gray-600)]"
+                >
+                  {s.email}
+                </a>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Right: LinkedIn QR */}
+      {/* Right: LinkedIn QRs */}
       <div className="flex shrink-0 flex-col items-center gap-4">
-        <div className="relative">
-          <QRCode
-            value={LINKEDIN_URL}
-            size={300}
-            level="H"
-            bgColor="#000000"
-            fgColor="#ffffff"
-            aria-label="LinkedIn QR code for Neha Manoj"
-          />
-          <div className="absolute left-1/2 top-1/2 flex h-[76px] w-[76px] -translate-x-1/2 -translate-y-1/2 items-center justify-center bg-black">
-            <Triangle className="h-10 w-10 text-[var(--ds-gray-1000)]" />
-          </div>
+        <div className="flex items-start gap-6">
+          {SPEAKERS.map((s) => (
+            <div key={s.name} className="flex flex-col items-center gap-3">
+              <div className="relative">
+                <QRCode
+                  value={s.linkedin}
+                  size={168}
+                  level="H"
+                  bgColor="#000000"
+                  fgColor="#ffffff"
+                  aria-label={`LinkedIn QR code for ${s.name}`}
+                />
+                <div className="absolute left-1/2 top-1/2 flex h-[44px] w-[44px] -translate-x-1/2 -translate-y-1/2 items-center justify-center bg-black">
+                  <Triangle className="h-6 w-6 text-[var(--ds-gray-1000)]" />
+                </div>
+              </div>
+              <span className="text-label-14 text-[var(--ds-gray-800)]">{s.name}</span>
+            </div>
+          ))}
         </div>
         <span className="font-mono text-label-14 uppercase tracking-[0.2em] text-[var(--ds-gray-600)]">
           Let&apos;s connect
