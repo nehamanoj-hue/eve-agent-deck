@@ -743,6 +743,62 @@ export default connection({
     ),
   },
 
+  // 11b - What is an agent (reprise)
+  {
+    id: 'agent-reprise',
+    nav: 'What is an agent (reprise)',
+    render: () => (
+      <Slide className="gap-14">
+        <div className="flex flex-col gap-6">
+          <Kicker index="03" label="Foundations" />
+          <h2 className="max-w-5xl text-balance text-heading-64 leading-[1.02] text-[var(--ds-gray-1000)]">
+            What is an agent?
+          </h2>
+          <p className="max-w-4xl text-pretty text-heading-32 font-normal leading-snug text-[var(--ds-gray-800)]">
+            A model that runs in a loop &mdash; it reads context, decides what to do,
+            takes an action with a tool, then repeats until the task is done.
+          </p>
+        </div>
+
+        <div className="flex flex-col items-stretch gap-4 lg:flex-row lg:items-center">
+          {[
+            { k: 'Perceive', d: 'Read the request, context, and history.' },
+            { k: 'Reason', d: 'The model decides the next best step.' },
+            { k: 'Act', d: 'Call a tool: an API, data, or code.' },
+          ].map((c, i, arr) => (
+            <div key={c.k} className="flex flex-1 items-center gap-4">
+              <div className="flex flex-1 flex-col gap-3 rounded-lg border border-[var(--ds-gray-500)] bg-[var(--ds-background-100)] p-7">
+                <span className="font-mono text-label-13 text-[var(--ds-gray-600)]">
+                  0{i + 1}
+                </span>
+                <span className="text-heading-24 text-[var(--ds-gray-1000)]">{c.k}</span>
+                <span className="text-copy-18 leading-snug text-[var(--ds-gray-700)]">{c.d}</span>
+              </div>
+              <span className="hidden text-heading-32 text-[var(--ds-gray-600)] lg:inline">
+                {i < arr.length - 1 ? '\u2192' : '\u21bb'}
+              </span>
+            </div>
+          ))}
+        </div>
+        <p className="font-mono text-label-14 uppercase tracking-[0.18em] text-[var(--ds-gray-600)]">
+          Loop until done
+        </p>
+
+        <div className="flex flex-col gap-3 rounded-xl border border-[var(--ds-blue-700)] bg-[var(--ds-blue-100)] p-7">
+          <span className="font-mono text-label-13 uppercase tracking-[0.18em] text-[var(--ds-blue-700)]">
+            The way we think about it
+          </span>
+          <p className="text-balance text-heading-32 font-normal leading-snug text-[var(--ds-gray-1000)]">
+            eve is to <span className="font-semibold text-[var(--ds-blue-700)]">agents</span>{' '}
+            what <span className="font-semibold">Next.js</span> is to{' '}
+            <span className="font-semibold">web apps</span> &mdash; the framework that
+            turns a prototype into production.
+          </p>
+        </div>
+      </Slide>
+    ),
+  },
+
   // 12 - Closing / connect
   {
     id: 'closing',
