@@ -77,21 +77,21 @@ const SPEAKERS: Speaker[] = [
 /** Reusable presenter identity block used on the opening and closing slides. */
 function PresenterCard({ lead }: { lead: ReactNode }) {
   return (
-    <div className="flex flex-col items-start justify-between gap-12 lg:flex-row lg:items-center">
+    <div className="flex flex-col items-start justify-between gap-16 lg:flex-row lg:items-center">
       {/* Left: statement + identity */}
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-10">
         <LogoVercel height={30} aria-label="Vercel" className="text-[var(--ds-gray-1000)]" />
         {lead}
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-6 border-t border-[var(--ds-gray-alpha-400)] pt-8">
           {SPEAKERS.map((s) => (
-            <div key={s.name} className="flex items-center gap-4">
+            <div key={s.name} className="flex items-center gap-5">
               <img
                 src={s.photo || '/placeholder.svg'}
                 alt={s.name}
-                className="h-14 w-14 rounded-full object-cover grayscale"
+                className="h-16 w-16 rounded-full object-cover grayscale"
               />
-              <div className="flex flex-col">
-                <p className="text-copy-24 text-[var(--ds-gray-1000)]">
+              <div className="flex flex-col gap-1">
+                <p className="text-copy-24 leading-tight text-[var(--ds-gray-1000)]">
                   {s.name}{' '}
                   <span className="text-[var(--ds-gray-600)]">· {s.role}</span>
                 </p>
@@ -108,14 +108,14 @@ function PresenterCard({ lead }: { lead: ReactNode }) {
       </div>
 
       {/* Right: LinkedIn QRs */}
-      <div className="flex shrink-0 flex-col items-center gap-4">
-        <div className="flex items-start gap-6">
+      <div className="flex shrink-0 flex-col items-center gap-6">
+        <div className="flex items-start gap-10">
           {SPEAKERS.map((s) => (
-            <div key={s.name} className="flex flex-col items-center gap-3">
+            <div key={s.name} className="flex flex-col items-center gap-4">
               <div className="relative">
                 <QRCode
                   value={s.linkedin}
-                  size={168}
+                  size={164}
                   level="H"
                   bgColor="#000000"
                   fgColor="#ffffff"
