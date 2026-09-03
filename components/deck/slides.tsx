@@ -743,60 +743,95 @@ export default connection({
     ),
   },
 
-  // 11b - What is an agent (reprise)
+  // 11b - Agent primitives (reprise)
   {
-    id: 'agent-reprise',
-    nav: 'What is an agent (reprise)',
-    render: () => (
-      <Slide className="gap-14">
-        <div className="flex flex-col gap-6">
-          <Kicker index="03" label="Foundations" />
-          <h2 className="max-w-5xl text-balance text-heading-64 leading-[1.02] text-[var(--ds-gray-1000)]">
-            What is an agent?
-          </h2>
-          <p className="max-w-4xl text-pretty text-heading-32 font-normal leading-snug text-[var(--ds-gray-800)]">
-            A model that runs in a loop &mdash; it reads context, decides what to do,
-            takes an action with a tool, then repeats until the task is done.
-          </p>
-        </div>
+    id: 'primitives-reprise',
+    nav: 'Agent primitives (reprise)',
+    render: () => {
+      const cards = [
+        {
+          lockup: (
+            <span className="flex items-center gap-2 text-heading-24 font-semibold text-[var(--ds-gray-1000)]">
+              AI <Tag>SDK</Tag>
+            </span>
+          ),
+          headline: 'Toolkit for unified model access',
+          viz: <VizAiSdk />,
+        },
+        {
+          lockup: (
+            <span className="flex items-center gap-2 text-heading-24 font-semibold text-[var(--ds-gray-1000)]">
+              AI <Tag>Gateway</Tag>
+            </span>
+          ),
+          headline: 'Hundreds of AI models. Zero API keys.',
+          viz: <VizGateway />,
+        },
+        {
+          lockup: (
+            <span className="flex items-center gap-2 text-heading-24 font-semibold text-[var(--ds-gray-1000)]">
+              Chat <Tag>SDK</Tag>
+            </span>
+          ),
+          headline: 'One codebase, every chat platform',
+          viz: <VizChat />,
+        },
+        {
+          lockup: (
+            <span className="text-heading-24 font-semibold leading-tight text-[var(--ds-gray-1000)]">
+              Fluid Compute
+            </span>
+          ),
+          headline: 'Active CPU pricing. Pay for what you actually use.',
+          viz: <VizFluid />,
+        },
+        {
+          lockup: (
+            <span className="flex items-center gap-2 text-heading-24 font-semibold text-[var(--ds-gray-1000)]">
+              <Triangle className="h-5 w-5" /> Sandbox
+            </span>
+          ),
+          headline: 'Fast, secure code execution',
+          viz: <VizSandbox />,
+        },
+        {
+          lockup: (
+            <span className="flex items-center gap-2 text-heading-24 font-semibold text-[var(--ds-gray-1000)]">
+              <EveMark className="h-4 w-4" /> Workflow
+            </span>
+          ),
+          headline: 'Make any TypeScript function durable',
+          viz: <VizWorkflow />,
+        },
+      ];
 
-        <div className="flex flex-col items-stretch gap-4 lg:flex-row lg:items-center">
-          {[
-            { k: 'Perceive', d: 'Read the request, context, and history.' },
-            { k: 'Reason', d: 'The model decides the next best step.' },
-            { k: 'Act', d: 'Call a tool: an API, data, or code.' },
-          ].map((c, i, arr) => (
-            <div key={c.k} className="flex flex-1 items-center gap-4">
-              <div className="flex flex-1 flex-col gap-3 rounded-lg border border-[var(--ds-gray-500)] bg-[var(--ds-background-100)] p-7">
-                <span className="font-mono text-label-13 text-[var(--ds-gray-600)]">
-                  0{i + 1}
-                </span>
-                <span className="text-heading-24 text-[var(--ds-gray-1000)]">{c.k}</span>
-                <span className="text-copy-18 leading-snug text-[var(--ds-gray-700)]">{c.d}</span>
+      return (
+        <Slide className="gap-8">
+          <div className="flex flex-col gap-3">
+            <Kicker index="11" label="We built the AI infrastructure" />
+            <h2 className="flex items-center gap-4 text-heading-40 text-[var(--ds-gray-1000)]">
+              <Triangle className="h-8 w-8" />
+              Agent primitives
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {cards.map((c) => (
+              <div
+                key={c.headline}
+                className="flex min-h-[300px] flex-col gap-3 rounded-lg border border-[var(--ds-gray-500)] bg-[var(--ds-background-100)] p-6"
+              >
+                {c.lockup}
+                <p className="text-pretty text-copy-18 text-[var(--ds-gray-800)]">{c.headline}</p>
+                <div className="mt-auto flex min-h-[140px] items-center justify-center">
+                  {c.viz}
+                </div>
               </div>
-              <span className="hidden text-heading-32 text-[var(--ds-gray-600)] lg:inline">
-                {i < arr.length - 1 ? '\u2192' : '\u21bb'}
-              </span>
-            </div>
-          ))}
-        </div>
-        <p className="font-mono text-label-14 uppercase tracking-[0.18em] text-[var(--ds-gray-600)]">
-          Loop until done
-        </p>
-
-        <div className="flex flex-col gap-3 rounded-xl border border-[var(--ds-blue-700)] bg-[var(--ds-blue-100)] p-7">
-          <span className="font-mono text-label-13 uppercase tracking-[0.18em] text-[var(--ds-blue-700)]">
-            The way we think about it
-          </span>
-          <p className="text-balance text-heading-32 font-normal leading-snug text-[var(--ds-gray-1000)]">
-            eve is to <span className="font-semibold text-[var(--ds-blue-700)]">agents</span>{' '}
-            what <span className="font-semibold">Next.js</span> is to{' '}
-            <span className="font-semibold">web apps</span> &mdash; the framework that
-            turns a prototype into production.
-          </p>
-        </div>
-      </Slide>
-    ),
+            ))}
+          </div>
+        </Slide>
+      );
+    },
   },
 
   // 12 - Closing / connect
