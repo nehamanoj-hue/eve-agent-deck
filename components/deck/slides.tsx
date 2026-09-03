@@ -4,10 +4,13 @@ import { LogoVercel } from '@vercel/geistcn-assets/logos';
 import {
   EveLogo,
   EveMark,
+  GlyphDiscord,
   GlyphGitHub,
   GlyphLinear,
   GlyphSlack,
   GlyphStripe,
+  GlyphTeams,
+  GlyphWeb,
   IconFile,
   IconFolder,
   IconKey,
@@ -559,6 +562,73 @@ export const slides: SlideDef[] = [
         </Slide>
       );
     },
+  },
+
+  // 7 - channels/ folder (how humans reach the agent)
+  {
+    id: 'channels',
+    nav: 'Channels',
+    render: () => (
+      <Slide className="gap-8">
+        <div className="flex flex-col gap-3">
+          <Kicker index="07" label="channels/" />
+          <h2 className="text-balance text-heading-48 leading-tight text-[var(--ds-gray-1000)]">
+            Meet users where they already are.
+          </h2>
+          <p className="max-w-4xl text-pretty text-heading-28 font-normal leading-snug text-[var(--ds-gray-800)]">
+            Drop a file into <span className="font-mono">channels/</span> and your agent shows
+            up in Slack, Discord, Teams, or a web chat &mdash; same handful of lines, no
+            frontend, sockets, or queues to build.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 items-center gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+          {/* left: folder + code */}
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-2 font-mono text-label-14 text-[var(--ds-gray-700)]">
+              <IconFolder className="h-4 w-4 text-[var(--ds-gray-1000)]" /> channels/
+            </div>
+            <div className="w-full overflow-hidden rounded-lg border border-[var(--ds-gray-400)] bg-black">
+              <div className="flex items-center gap-2 border-b border-[var(--ds-gray-400)] px-3 py-2">
+                <span className="rounded-[3px] bg-[var(--ds-gray-300)] px-1 font-mono text-[10px] font-medium text-black">
+                  TS
+                </span>
+                <span className="font-mono text-[11px] text-[var(--ds-gray-600)]">
+                  channels/slack.ts
+                </span>
+              </div>
+              <pre className="whitespace-pre px-4 py-4 font-mono text-[12px] leading-[1.8] text-[var(--ds-gray-800)]">
+                {`import { channel } from "eve/channels";
+
+export default channel({
+  type: "slack",
+  // Your agent now lives in the workspace.
+  // Mentions in, replies and actions out.
+});`}
+              </pre>
+            </div>
+          </div>
+
+          {/* right: channel targets */}
+          <div className="grid grid-cols-2 gap-3">
+            {[
+              { k: 'Slack', g: <GlyphSlack className="h-6 w-6" /> },
+              { k: 'Discord', g: <GlyphDiscord className="h-6 w-6" /> },
+              { k: 'Teams', g: <GlyphTeams className="h-6 w-6" /> },
+              { k: 'Web chat', g: <GlyphWeb className="h-6 w-6" /> },
+            ].map((c) => (
+              <div
+                key={c.k}
+                className="flex flex-col items-start gap-4 rounded-lg border border-[var(--ds-gray-500)] bg-[var(--ds-background-100)] p-5"
+              >
+                <span className="text-[var(--ds-gray-1000)]">{c.g}</span>
+                <span className="text-heading-24 text-[var(--ds-gray-1000)]">{c.k}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Slide>
+    ),
   },
 
   // 8 - connections/ folder (reach any API)

@@ -502,6 +502,31 @@ export function GlyphLinear({ className = '' }: { className?: string }) {
   );
 }
 
+export function GlyphDiscord({ className = '' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M19.63 5.5A17.3 17.3 0 0 0 15.4 4.2a12 12 0 0 0-.55 1.12 16 16 0 0 0-4.7 0A12 12 0 0 0 9.6 4.2 17.3 17.3 0 0 0 5.36 5.5C2.68 9.48 1.96 13.35 2.32 17.17a17.4 17.4 0 0 0 5.3 2.66c.43-.58.8-1.2 1.13-1.85-.62-.23-1.21-.51-1.78-.85.15-.11.3-.22.43-.34a12.4 12.4 0 0 0 10.6 0c.14.12.28.23.43.34-.57.34-1.16.62-1.78.85.33.65.7 1.27 1.13 1.85a17.4 17.4 0 0 0 5.3-2.66c.42-4.43-.72-8.27-3.05-11.67ZM8.9 14.85c-1.03 0-1.87-.94-1.87-2.1 0-1.16.83-2.1 1.87-2.1 1.05 0 1.9.95 1.88 2.1 0 1.16-.84 2.1-1.88 2.1Zm6.2 0c-1.03 0-1.87-.94-1.87-2.1 0-1.16.83-2.1 1.87-2.1 1.05 0 1.9.95 1.88 2.1 0 1.16-.83 2.1-1.88 2.1Z" />
+    </svg>
+  );
+}
+
+export function GlyphTeams({ className = '' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M13.5 9.5h6.9c.33 0 .6.27.6.6v5.3a3.8 3.8 0 0 1-3.8 3.8 3.8 3.8 0 0 1-3.7-3v-6.7ZM19.5 8a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5ZM11 8.25a2.75 2.75 0 1 0 0-5.5 2.75 2.75 0 0 0 0 5.5ZM3 7h9c.55 0 1 .45 1 1v9.5A3.5 3.5 0 0 1 9.5 21h-2A3.5 3.5 0 0 1 4 17.5V8c0-.55-.45-1-1-1Zm1.9 3.1v1.5h1.85v5.3h1.7v-5.3h1.85v-1.5H4.9Z" />
+    </svg>
+  );
+}
+
+export function GlyphWeb({ className = '' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true" className={className}>
+      <circle cx="12" cy="12" r="9.25" />
+      <path d="M2.75 12h18.5M12 2.75c2.5 2.4 3.9 5.8 3.9 9.25s-1.4 6.85-3.9 9.25c-2.5-2.4-3.9-5.8-3.9-9.25s1.4-6.85 3.9-9.25Z" />
+    </svg>
+  );
+}
+
 /** The dotted "agents" triangle from the reference title slide, recreated as an SVG. */
 export function AgentsTriangle({ className = '' }: { className?: string }) {
   const top = { x: 300, y: 40 };
