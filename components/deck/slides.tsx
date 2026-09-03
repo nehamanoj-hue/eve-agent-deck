@@ -61,7 +61,7 @@ const SPEAKERS: Speaker[] = [
   {
     name: 'Neha Manoj',
     role: 'Solutions Architect',
-    email: 'Neha.manoj@vercel.com',
+    email: 'neha.manoj@vercel.com',
     photo: '/neha-manoj.png',
     linkedin: 'https://www.linkedin.com/in/neha-manoj/',
   },
